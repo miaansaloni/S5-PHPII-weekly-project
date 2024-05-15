@@ -5,7 +5,7 @@ require_once './db.php';
 require_once './classes/Posts.php';
 
 // Verifica se l'utente è autenticato
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['adminUser'])) {
     header("Location: login.php");
     exit;
 }
@@ -61,7 +61,7 @@ if (!$post) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Post</title>
+    <title>CinéCritique | Edit Post</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/style.css">

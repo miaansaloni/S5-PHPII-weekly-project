@@ -5,7 +5,7 @@ require_once './classes/UserManager.php';
 require_once 'db.php';
 
 // Verifica se l'utente è già autenticato
-if (isset($_SESSION['username'])) {
+if (isset($_SESSION['adminUser'])) {
     header("Location: dashboard.php");
     exit;
 }
@@ -13,22 +13,22 @@ if (isset($_SESSION['username'])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["login"])) {
         // Login utente
-        $username = $_POST["username"];
+        $adminUser = $_POST["adminUser"];
         $password = $_POST["password"];
 
-        $user = new UserManager($username, $password, $conn);
+        $user = new UserManager($adminUser, $password, $conn);
         if ($user->login()) {
             // Autenticazione riuscita, reindirizza alla pagina protetta
-            $_SESSION['username'] = $username;
+            $_SESSION['adminUser'] = $adminUser;
             header("Location: dashboard.php");
             exit;
         }
     } elseif (isset($_POST["register"])) {
         // Registrazione utente
-        $username = $_POST["username"];
+        $adminUser = $_POST["adminUser"];
         $password = $_POST["password"];
 
-        $user = new UserManager($username, $password, $conn);
+        $user = new UserManager($adminUser, $password, $conn);
         $user->register();
     }
 }
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>CinéCritique | Login</title>
         <!-- BOOTSTRAP TEMPORANEO -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/style.css">
@@ -49,8 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h2 class="text-center">Login</h2>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" class="form-control" name="username" id="username" required>
+                    <label for="adminUser">Username:</label>
+                    <input type="text" class="form-control" name="adminUser" id="adminUser" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>
@@ -64,8 +64,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h2 class="text-center">Sign up!</h2>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" class="form-control" name="username" id="username" required>
+                    <label for="adminUser">Username:</label>
+                    <input type="text" class="form-control" name="adminUser" id="adminUser" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>

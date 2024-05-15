@@ -1,19 +1,19 @@
 <?php
 
 class UserManager {
-    private $username;
+    private $adminUser;
     private $password;
     private $conn;
 
-    public function __construct($username, $password, $conn) {
-        $this->username = $username;
+    public function __construct($adminUser, $password, $conn) {
+        $this->adminUser = $adminUser;
         $this->password = $password;
         $this->conn = $conn; 
     }
 
     public function register() {
-        $stmt = $this->conn->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
-        $stmt->bindParam(':username', $this->username);
+        $stmt = $this->conn->prepare("INSERT INTO users (adminUser, password) VALUES (:adminUser, :password)");
+        $stmt->bindParam(':adminUser', $this->adminUser);
         $stmt->bindParam(':password', $this->password);
 
         try {
@@ -25,8 +25,8 @@ class UserManager {
     }
 
     public function login() {
-        $stmt = $this->conn->prepare("SELECT * FROM users WHERE username = :username AND password = :password");
-        $stmt->bindParam(':username', $this->username);
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE adminUser = :adminUser AND password = :password");
+        $stmt->bindParam(':adminUser', $this->adminUser);
         $stmt->bindParam(':password', $this->password);
         $stmt->execute();
 
@@ -45,7 +45,7 @@ class UserManager {
         // Distrugge la sessione
         session_destroy();
         // Reindirizza l'utente alla pagina di login
-        header("Location: login.php");
+        header("Location: index.php");
         exit;
     }
 

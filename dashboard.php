@@ -6,14 +6,14 @@ require_once './db.php';
 require_once './classes/Posts.php';
 
 // Verifica se l'utente è autenticato
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['adminUser'])) {
     header("Location: login.php");
     exit;
 }
-$username = $_SESSION['username'];
+$adminUser = $_SESSION['adminUser'];
 
 // Crea un'istanza del gestore utente
-$userManager = new UserManager($username, null, $conn);
+$userManager = new UserManager($adminUser, null, $conn);
 
 // Gestione del logout al click
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["logout"])) {
@@ -43,7 +43,7 @@ $posts = $postsManager->getAllPosts();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>CinéCritique | Admin Dashboard</title>
     <!-- BOOTSTRAP TEMPORANEO -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/style.css">
@@ -52,7 +52,7 @@ $posts = $postsManager->getAllPosts();
 <body>
     <div class="container mt-5">
         <div class="row">
-            <h2>Welcome, <?php echo $username; ?>!</h2>
+            <h2>Welcome, <?php echo $adminUser; ?>!</h2>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <button type="submit" name="logout" class="btn btn-danger">Logout</button>
             </form>

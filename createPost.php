@@ -4,7 +4,7 @@ require_once './classes/Posts.php';
 
 // Verifica se l'utente è autenticato
 session_start();
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['adminUser'])) {
     header("Location: login.php");
     exit;
 }
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create New Post</title>
+    <title>CinéCritique | Create New Post</title>
     <!-- BOOTSTRAP TEMPORANEO -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/style.css">
