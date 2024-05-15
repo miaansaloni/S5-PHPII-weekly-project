@@ -8,7 +8,6 @@ class UserManager {
     public function __construct($username, $password, $conn) {
         $this->username = $username;
         $this->password = $password;
-        // Ricevo la connessione al database come parametro
         $this->conn = $conn; 
     }
 
@@ -38,6 +37,16 @@ class UserManager {
             echo "<div class='alert alert-danger' role='alert'>Invalid credentials.</div>";
             return false;
         }
+    }
+
+    public function logout() {
+        // Elimina tutte le variabili di sessione
+        session_unset();
+        // Distrugge la sessione
+        session_destroy();
+        // Reindirizza l'utente alla pagina di login
+        header("Location: login.php");
+        exit;
     }
 
 }

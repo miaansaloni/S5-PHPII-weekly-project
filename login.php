@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button type="submit" name="login" class="btn btn-primary btn-block">Log in</button>
             </form>
             <br>
-            <p class="text-center">Don't have an account? <a href="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>?register=true">Registrati qui</a>.</p>
+            <p class="text-center">Don't have an account? <a href="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>?register=true">Sign up</a>.</p>
         <?php else: ?>
             <h2 class="text-center">Sign up!</h2>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
