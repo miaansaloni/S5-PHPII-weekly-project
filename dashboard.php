@@ -51,26 +51,35 @@ $posts = $postsManager->getAllPosts();
 </head>
 <body>
     <div class="container mt-5">
-        <h2>Welcome, <?php echo $username; ?>!</h2>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <button type="submit" name="logout" class="btn btn-danger">Logout</button>
-        </form>
+        <div class="row">
+            <h2>Welcome, <?php echo $username; ?>!</h2>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <button type="submit" name="logout" class="btn btn-danger">Logout</button>
+            </form>
+        </div>
+        
         <a href="createPost.php" class="btn btn-primary mt-3">Create New Post</a>
         
+        
+        
         <div class="mt-3">
-            <h3>Posts List</h3>
-            <ul class="list-group">
+
+            <h3>Post List</h3>
+            
                 <?php foreach ($posts as $post): ?>
-                    <li class="list-group-item"><?php echo $post['title']; ?> 
-                        <a href="ViewPost.php?id=<?php echo $post['id']; ?>" class="btn btn-primary">View</a> 
-                        <a href="updatePost.php?id=<?php echo $post['id']; ?>" class="btn btn-warning">Edit</a>
-                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" style="display: inline;">
-                            <input type="hidden" name="delete_id" value="<?php echo $post['id']; ?>">
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
-                        </form>
-                    </li>
+                    <div class="row mb-2"> 
+                        <div class="col"><h6><?php echo $post['title']; ?></h6></div>
+                        <div class="col">
+                            <a href="ViewPost.php?id=<?php echo $post['id']; ?>" class="btn btn-primary">View</a> 
+                            <a href="updatePost.php?id=<?php echo $post['id']; ?>" class="btn btn-warning">Edit</a>
+                            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" style="display: inline;">
+                                <input type="hidden" name="delete_id" value="<?php echo $post['id']; ?>">
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+                            </form>
+                        </div>
+                    </div>
                 <?php endforeach; ?>
-            </ul>
+            
         </div>
     </div>
 

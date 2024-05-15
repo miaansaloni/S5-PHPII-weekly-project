@@ -38,7 +38,8 @@ if (!$post) {
         <h2><?php echo $post['title']; ?></h2>
         <p><strong>Director:</strong> <?php echo $post['director']; ?></p>
         <p><strong>Year:</strong> <?php echo $post['year']; ?></p>
-        <p><?php echo $post['text']; ?></p>
+        <p><strong>Summary: <br> </strong><?php echo $post['summary']; ?></p>
+        <p><strong>Review: <br> </strong><?php echo $post['review']; ?></p>
     </div>
 
     <!-- Bootstrap JS -->

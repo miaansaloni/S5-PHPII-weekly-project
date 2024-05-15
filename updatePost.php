@@ -25,14 +25,15 @@ $postId = $_GET['id'];
 // Verifica se il form è stato inviato
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verifica se tutti i campi sono stati compilati
-    if (isset($_POST['title']) && isset($_POST['director']) && isset($_POST['year']) && isset($_POST['text'])) {
+    if (isset($_POST['title']) && isset($_POST['director']) && isset($_POST['year']) && isset($_POST['summary']) && isset($_POST['review'])) {
         $title = $_POST['title'];
         $director = $_POST['director'];
         $year = $_POST['year'];
-        $text = $_POST['text'];
+        $summary = $_POST['summary'];
+        $review = $_POST['review'];
 
         // Aggiorna il post nel database
-        if ($postsManager->updatePost($postId, $title, $director, $year, $text)) {
+        if ($postsManager->updatePost($postId, $title, $director, $year, $summary, $review)) {
             // Redirect alla dashboard dopo l'aggiornamento del post
             header("Location: dashboard.php");
             exit;
@@ -88,8 +89,12 @@ if (!$post) {
                 <input type="text" class="form-control" id="year" name="year" value="<?php echo htmlspecialchars($post['year']); ?>">
             </div>
             <div class="form-group">
-                <label for="text">Text:</label>
-                <textarea class="form-control" id="text" name="text"><?php echo htmlspecialchars($post['text']); ?></textarea>
+                <label for="summary">Summary:</label>
+                <textarea class="form-control" id="summary" name="summary"><?php echo htmlspecialchars($post['summary']); ?></textarea>
+            </div>
+            <div class="form-group">
+                <label for="review">Review:</label>
+                <textarea class="form-control" id="review" name="review"><?php echo htmlspecialchars($post['summary']); ?></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
         </form>

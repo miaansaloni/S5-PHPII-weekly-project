@@ -14,12 +14,13 @@ class Posts {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function createPost($title, $director, $year, $text) {
-        $stmt = $this->conn->prepare("INSERT INTO posts (title, director, year, text) VALUES (:title, :director, :year, :text)");
+    public function createPost($title, $director, $year, $summary, $review) {
+        $stmt = $this->conn->prepare("INSERT INTO posts (title, director, year, summary, review) VALUES (:title, :director, :year, :summary, :review)");
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':director', $director);
         $stmt->bindParam(':year', $year);
-        $stmt->bindParam(':text', $text);
+        $stmt->bindParam(':summary', $summary);
+        $stmt->bindParam(':review', $review);
         try {
             $stmt->execute();
             return true;
@@ -35,13 +36,14 @@ class Posts {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function updatePost($id, $title, $director, $year, $text) {
-        $stmt = $this->conn->prepare("UPDATE posts SET title = :title, director = :director, year = :year, text = :text WHERE id = :id");
+    public function updatePost($id, $title, $director, $year, $summary, $review) {
+        $stmt = $this->conn->prepare("UPDATE posts SET title = :title, director = :director, year = :year, summary = :summary, review = :review WHERE id = :id");
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':director', $director);
         $stmt->bindParam(':year', $year);
-        $stmt->bindParam(':text', $text);
+        $stmt->bindParam(':summary', $summary);
+        $stmt->bindParam(':review', $review);
         
         try {
             $stmt->execute();

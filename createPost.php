@@ -13,12 +13,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $_POST['title'];
     $director = $_POST['director'];
     $year = $_POST['year'];
-    $text = $_POST['text'];
+    $summary = $_POST['summary'];
+    $review = $_POST['review'];
 
     $postsManager = new Posts($conn);
 
     // Creazione del post nel database
-    if ($postsManager->createPost($title, $director, $year, $text)) {
+    if ($postsManager->createPost($title, $director, $year, $summary, $review)) {
         // Redirect alla dashboard dopo la creazione del post
         header("Location: dashboard.php");
         exit;
@@ -56,8 +57,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="number" class="form-control" id="year" name="year" required>
             </div>
             <div class="form-group">
-                <label for="text">Text:</label>
-                <textarea class="form-control" id="text" name="text" rows="5" required></textarea>
+                <label for="summary">Summary:</label>
+                <textarea class="form-control" id="text" name="summary" rows="5" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="review">Review:</label>
+                <textarea class="form-control" id="text" name="review" rows="5" required></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Save</button>
